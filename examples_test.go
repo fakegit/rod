@@ -170,7 +170,7 @@ func Example_customize_retry_strategy() {
 		kit.E(err)
 	}
 
-	fmt.Println(el.Eval(`() => this.name`).String())
+	fmt.Println(el.Eval(`this.name`).String())
 
 	// Output: q
 }
@@ -234,7 +234,7 @@ func Example_direct_cdp() {
 
 	// Eval injects a script into the page. We use this to return the cookies
 	// that JS detects to validate our cdp call.
-	cookie := page.Eval(`() => document.cookie`).String()
+	cookie := page.Eval(`document.cookie`).String()
 
 	fmt.Println(cookie)
 
@@ -283,7 +283,7 @@ func Example_handle_events() {
 		wait()
 	}
 
-	page.Eval(`() => console.log("hello", "world")`)
+	page.Eval(`console.log("hello", "world")`)
 
 	<-done
 
@@ -318,7 +318,7 @@ func Example_hijack_requests() {
 
 	go router.Run()
 
-	browser.Page("https://www.wikipedia.org/").Wait(`() => document.title === 'hi'`)
+	browser.Page("https://www.wikipedia.org/").Wait(`document.title === 'hi'`)
 
 	fmt.Println("done")
 

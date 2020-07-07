@@ -25,9 +25,14 @@ func sprintFnApply(js string, params Array) string {
 	return fmt.Sprintf(tpl, js, kit.MustToJSON(params))
 }
 
-// SprintFnThis wrap js with this
+var regFn = regexp.MustCompile(`=>|function`)
+
+// SprintFnThis wrap js with this, wrap function call if it's js expression
 func SprintFnThis(js string) string {
-	return fmt.Sprintf(`function() { return (%s).apply(this, arguments) }`, js)
+	if regFn.MatchString(js) {
+		return fmt.Sprintf(`function() { return (%s).apply(this, arguments) }`, js)
+	}
+	return fmt.Sprintf(`function() { return (%s) }`, js)
 }
 
 // CancelPanic graceful panic

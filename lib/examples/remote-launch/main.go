@@ -19,7 +19,7 @@ func main() {
 	browser.ServeMonitor(":7777", true)
 
 	fmt.Println(
-		browser.Page("https://github.com").Eval("() => document.title"),
+		browser.Page("https://github.com").Eval("document.title"),
 	)
 
 	kit.Pause()

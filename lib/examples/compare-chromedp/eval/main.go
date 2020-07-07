@@ -13,7 +13,7 @@ func main() {
 	res := rod.New().Connect().
 		Page("https://www.google.com/").
 		Element("#main").
-		Eval("() => Object.keys(window)")
+		Eval("Object.keys(window)")
 
 	log.Printf("window object keys: %v", res)
 }
