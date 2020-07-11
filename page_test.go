@@ -210,7 +210,10 @@ func (s *S) TestPageEvalOnNewDocument() {
 	p.Navigate("")
 
 	s.Equal("rod", p.Eval("() => navigator.rod").String())
+}
 
+func (s *S) TestPageHelperJSFootprint() {
+	s.Equal("undefined", s.page.Eval("() => typeof(rod)").Str)
 }
 
 func (s *S) TestUntilPage() {
